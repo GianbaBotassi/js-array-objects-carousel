@@ -13,7 +13,7 @@
 // BONUS 3:
 // Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
 
-// Creo array con immagini richieste
+// Array dato da esercizio
 const images = [
     {
         image: 'img/01.webp',
@@ -38,10 +38,10 @@ const images = [
     }
 ];
 
-// Creo costante per collegare items container
+// Collego da DOM elemento container
 const elContainer = document.getElementById("items_container");
 
-// Creo costante per collegare items thumbnail container
+// Collego da DOM elemento container Thumbnail
 const elThumbnailContainer = document.getElementById("thumbnail_container");
 
 
@@ -49,21 +49,19 @@ const elThumbnailContainer = document.getElementById("thumbnail_container");
 images.forEach(immagine => {
 
     // Creo div per immagini
-    elContainer.innerHTML += `<div class="item">
-    <img src="${immagine.image}">
-    <div class="text">
-        <h2>${immagine.title}</h2>
-        <p>${immagine.text}</p>
-    </div>
-    </div>`;
+    elContainer.innerHTML +=    `<div class="item">
+                                    <img src="${immagine.image}">
+                                    <div class="text">
+                                        <h2>${immagine.title}</h2>
+                                        <p>${immagine.text}</p>
+                                    </div>
+                                </div>`;
 
     // Creo div per thumbnail immagini
-    elThumbnailContainer.innerHTML += `<div class="thumb">
-    <img src="${immagine.image}">
-    </div>`;
-
+    elThumbnailContainer.innerHTML +=   `<div class="thumb">
+                                            <img src="${immagine.image}">
+                                        </div>`;
 })
-
 
 
 // Creo array con tutti i div creati
@@ -79,72 +77,76 @@ let index = 0;
 divList[index].classList.add("active");
 thumbnailList[index].classList.add("brightness");
 
+
+/******************** ZONA BOTTONI  ***************************/
+
 // Dichiaro e assegno costante al bottone in basso nel DOM
-const botButton = document.getElementById("bottom_button");
-
-// Set intervallo di 3 secondi per far cambiare posizione array
-setInterval(() => {
-    divList[index].classList.remove("active");
-    thumbnailList[index].classList.remove("brightness");
-
-        if(index === divList.length -1){
-            index = 0;
-        }else{
-
-        index++;
-        }
-
-        divList[index].classList.add("active");
-        thumbnailList[index].classList.add("brightness");  
-
-},3000)
+const elBotButton = document.getElementById("bottom_button");
 
 // Creo funzione con bottone per traslare immagini dall'alto verso il basso
-botButton.addEventListener("click",
-    function(){
+elBotButton.addEventListener("click",switchBottom);
 
-    // Rimuovo la classe active e brightness alla prima posizione dell'array
+// Dichiaro e assegno costante al bottone in alto nel DOM
+const elTopButton = document.getElementById("top_button");
+
+// Creo funzione con bottone per traslare immagini dal basso verso l'alto
+elTopButton.addEventListener("click",switchTop);  
+
+
+/******************** ZONA BOTTONI PER SET INTERVAL  ***************************/
+
+// Set intervallo di 3 secondi per far cambiare posizione array
+let timer = setInterval(switchBottom,1000);
+
+// Assegno bottone per stoppare setinterval e funzione clearinterval
+const elStopButton = document.getElementById('stop-time');
+elStopButton.addEventListener('click', ()=> clearInterval(timer));
+
+// Assegno bottone per ricominciare seinterval e funzione setinterval
+const elPlayButton = document.getElementById('play-time');
+elPlayButton.addEventListener('click', ()=> {
+    clearInterval(timer);
+    timer = setInterval(switchBottom,1000);
+});
+
+// Assegno bottone per revertare seinterval e funzione setinterval al contrario
+const elRevertButton = document.getElementById('revert-time');
+elRevertButton.addEventListener('click', ()=> {
+    clearInterval(timer);
+    timer = setInterval(switchTop,1000)
+});
+
+/***********************************FUNCTIONS ****************************/
+
+// Funzione per switchare in BASSO l'index dell'array
+function switchBottom(){
     divList[index].classList.remove("active");
     thumbnailList[index].classList.remove("brightness");
 
-        // Se index è uguale a 4 riparte da 0
-        if(index === divList.length -1){
-            index = 0;
-        }else{
+    if(index === divList.length -1){
+        index = 0;
+    }else{
 
-        // Sposto di 1 la posizione array
-        index++;
-
-        }
-        // Aggiungo la classe active e brightness al successivo elemento
-        divList[index].classList.add("active");
-        thumbnailList[index].classList.add("brightness");                   
+    index++;
     }
-)
 
-// Dichiaro e assegno costante al bottone in alto nel DOM
-const topButton = document.getElementById("top_button");
+    divList[index].classList.add("active");
+    thumbnailList[index].classList.add("brightness");      
+}
 
-// Creo funzione con bottone per traslare immagini dal basso verso l'alto
-topButton.addEventListener("click",
-    function(){
+// Funzione per switchare in ALTO l'index dell'array
+function switchTop(){
 
-            // Rimuovo la classe active e brightness alla prima posizione dell'array
-            divList[index].classList.remove("active");
-            thumbnailList[index].classList.remove("brightness");
+    divList[index].classList.remove("active");
+    thumbnailList[index].classList.remove("brightness");
 
-            // Se index è uguale a 0 riparte da 4
-            if (index === 0) {
-                index = divList.length - 1;
-            }else{
-            // Sposto di 1 la posizione array
-            index--;
-            }
+    if (index === 0) {
+        index = divList.length - 1;
+    }else{
+    index--;
+    }
 
-            // Aggiungo la classe active e brightness al successivo elemento
-            divList[index].classList.add("active");
-            thumbnailList[index].classList.add("brightness");
+    divList[index].classList.add("active");
+    thumbnailList[index].classList.add("brightness");        
 
-        }
-)
-
+    }

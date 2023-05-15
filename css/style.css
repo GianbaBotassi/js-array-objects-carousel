@@ -87,6 +87,15 @@ button{
     cursor: pointer;
     z-index: 1;
 }
+#play-time{
+    top: 100px;
+}
+#revert-time{
+    bottom: 100px;
+}
+.button-timer{
+    left: 50px;
+}
 #top_button{
     right: 50%;
     top:2%;
