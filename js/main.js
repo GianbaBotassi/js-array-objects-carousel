@@ -47,8 +47,8 @@ botButton.addEventListener("click",
     thumbnailList[index].classList.remove("brightness");
 
         // Se index è uguale a 4 riparte da 0
-        if(index === 4){
-            index = 0
+        if(index === divList.length -1){
+            index = 0;
         }else{
 
         // Sposto di 1 la posizione array
@@ -59,7 +59,6 @@ botButton.addEventListener("click",
         divList[index].classList.add("active");
         thumbnailList[index].classList.add("brightness");                   
         // Se la posizione dell'array imgList è inferiore alla sua lunghezza(5)
-            
     }
 )
 
@@ -76,7 +75,7 @@ topButton.addEventListener("click",
 
             // Se index è uguale a 0 riparte da 4
             if (index === 0) {
-                index = 4
+                index = divList.length - 1;
             }else{
             // Sposto di 1 la posizione array
             index--;
