@@ -63,7 +63,6 @@ images.forEach(immagine => {
                                         </div>`;
 })
 
-
 // Creo array con tutti i div creati
 const divList = document.getElementsByClassName("item");
 
@@ -96,7 +95,7 @@ elTopButton.addEventListener("click",switchTop);
 /******************** ZONA BOTTONI PER SET INTERVAL  ***************************/
 
 // Set intervallo di 3 secondi per far cambiare posizione array
-let timer = setInterval(switchBottom,1000);
+let timer = setInterval(switchBottom,3000);
 
 // Assegno bottone per stoppare setinterval e funzione clearinterval
 const elStopButton = document.getElementById('stop-time');
@@ -106,14 +105,14 @@ elStopButton.addEventListener('click', ()=> clearInterval(timer));
 const elPlayButton = document.getElementById('play-time');
 elPlayButton.addEventListener('click', ()=> {
     clearInterval(timer);
-    timer = setInterval(switchBottom,1000);
+    timer = setInterval(switchBottom,3000);
 });
 
 // Assegno bottone per revertare seinterval e funzione setinterval al contrario
 const elRevertButton = document.getElementById('revert-time');
 elRevertButton.addEventListener('click', ()=> {
     clearInterval(timer);
-    timer = setInterval(switchTop,1000)
+    timer = setInterval(switchTop,3000)
 });
 
 /***********************************FUNCTIONS ****************************/
@@ -150,3 +149,4 @@ function switchTop(){
     thumbnailList[index].classList.add("brightness");        
 
     }
+
