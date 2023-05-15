@@ -1,5 +1,42 @@
+// Milestone 0:
+// Come nel primo carosello realizzato, focalizziamoci prima sulla creazione del markup statico: costruiamo il container e inseriamo l’immagine grande in modo da poter stilare lo slider.
+// Milestone 1:
+// Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
+// Al click dell’utente sulle frecce verso sopra e sotto, l’immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
+// Milestone 2:
+// Aggiungere il **ciclo infinito** del carosello.
+// Ovvero se l’immagine attiva è la prima e l’utente clicca la freccia verso sopra, l’immagine che deve attivarsi sarà l’ultima e viceversa per l’ultima miniatura se l’utente clicca la freccia verso sotto.
+// BONUS 1:
+// Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
+// BONUS 2:
+// Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva.
+// BONUS 3:
+// Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
+
 // Creo array con immagini richieste
-const imgList = ["img/01.webp","img/02.webp","img/03.webp","img/04.webp","img/05.webp"]
+const images = [
+    {
+        image: 'img/01.webp',
+        title: 'Marvel\'s Spiderman Miles Morale',
+        text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
+    }, {
+        image: 'img/02.webp',
+        title: 'Ratchet & Clank: Rift Apart',
+        text: 'Go dimension-hopping with Ratchet and Clank as they take on an evil emperor from another reality.',
+    }, {
+        image: 'img/03.webp',
+        title: 'Fortnite',
+        text: "Grab all of your friends and drop into Epic Games Fortnite, a massive 100 - player face - off that combines looting, crafting, shootouts and chaos.",
+    }, {
+        image: 'img/04.webp',
+        title: 'Stray',
+        text: 'Lost, injured and alone, a stray cat must untangle an ancient mystery to escape a long-forgotten city',
+    }, {
+        image: 'img/05.webp',
+        title: "Marvel's Avengers",
+        text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
+    }
+];
 
 // Creo costante per collegare items container
 const elContainer = document.getElementById("items_container");
@@ -7,20 +44,27 @@ const elContainer = document.getElementById("items_container");
 // Creo costante per collegare items thumbnail container
 const elThumbnailContainer = document.getElementById("thumbnail_container");
 
-// Creo ciclo per caricare tutte le immagini dell'array e thumbnail
-for(let i = 0; i < 5; i++){
 
-    // Innesto nel container una stringa backtick che si ripeta per le immagini
+// Ciclo array oggetti con forEach
+images.forEach(immagine => {
+
+    // Creo div per immagini
     elContainer.innerHTML += `<div class="item">
-                                <img src="${imgList[i]}">
-                            </div>`;
+    <img src="${immagine.image}">
+    <div class="text">
+        <h2>${immagine.title}</h2>
+        <p>${immagine.text}</p>
+    </div>
+    </div>`;
 
-     // Innesto nel container una stringa backtick che si ripeta per le THUMBNAIL
+    // Creo div per thumbnail immagini
     elThumbnailContainer.innerHTML += `<div class="thumb">
-                                    <img src="${imgList[i]}">
-                                    </div>`;
+    <img src="${immagine.image}">
+    </div>`;
 
-}
+})
+
+
 
 // Creo array con tutti i div creati
 const divList = document.getElementsByClassName("item");
@@ -58,7 +102,6 @@ botButton.addEventListener("click",
         // Aggiungo la classe active e brightness al successivo elemento
         divList[index].classList.add("active");
         thumbnailList[index].classList.add("brightness");                   
-        // Se la posizione dell'array imgList è inferiore alla sua lunghezza(5)
     }
 )
 

@@ -29,6 +29,7 @@ body{
 #items_container{
     height: 100%;
     width: 75%;
+    position: relative;
 }
 #items_container img{
     height: 100%;
@@ -39,13 +40,19 @@ body{
 .active{
     display: block;
 }
-
-/* Class to hidden buttons */
-.hidden{
-    display: none;
+.text{
+    position: absolute;
+    right: 20px;
+    bottom: 40px;
+    text-align: right;
+    color: white;
+    padding-left: 100px;
+}
+.text p{
+    margin-top: 5px;
 }
 
-/* Thumnail styles */
+/* Thumbnail styles */
 #thumbnail_container{
     position: relative;
     width: 25%;
