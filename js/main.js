@@ -82,6 +82,23 @@ thumbnailList[index].classList.add("brightness");
 // Dichiaro e assegno costante al bottone in basso nel DOM
 const botButton = document.getElementById("bottom_button");
 
+// Set intervallo di 3 secondi per far cambiare posizione array
+setInterval(() => {
+    divList[index].classList.remove("active");
+    thumbnailList[index].classList.remove("brightness");
+
+        if(index === divList.length -1){
+            index = 0;
+        }else{
+
+        index++;
+        }
+
+        divList[index].classList.add("active");
+        thumbnailList[index].classList.add("brightness");  
+
+},3000)
+
 // Creo funzione con bottone per traslare immagini dall'alto verso il basso
 botButton.addEventListener("click",
     function(){
